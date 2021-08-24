@@ -1,6 +1,10 @@
 import express from "express"
+import multer from "multer"
+import bodyParser from "body-parser"
 
 const router = express.Router()
+const jsonParser = bodyParser.json()
+const upload = multer()
 
 /**
  * 获取所有奖池信息
@@ -10,8 +14,8 @@ const router = express.Router()
  * @sample http://localhost:8888/lottery/all
  * @returns
  */
-router.get("/all", (req, res) => {
-    res.send("all infos")
+router.get("/all", (req, res, next) => {
+    res.send("all infos1")
 })
 
 /**
@@ -22,7 +26,7 @@ router.get("/all", (req, res) => {
  * @sample http://localhost:8888/lottery/:id
  * @returns
  */
-router.get("/:id", (req, res) => {
+router.get("/:id", (req, res, next) => {
     res.send("get infos")
 })
 
@@ -34,7 +38,7 @@ router.get("/:id", (req, res) => {
  * @sample http://localhost:8888/lottery/
  * @returns id
  */
-router.post("/", (req, res) => {
+router.post("/", jsonParser, (req, res, next) => {
     res.send("post infos")
 })
 
@@ -46,7 +50,7 @@ router.post("/", (req, res) => {
  * @sample http://localhost:8888/lottery/:id
  * @returns
  */
-router.put("/:id", (req, res) => {
+router.put("/:id", jsonParser, (req, res, next) => {
     res.send("put infos")
 })
 
@@ -58,7 +62,7 @@ router.put("/:id", (req, res) => {
  * @sample http://localhost:8888/lottery/:id
  * @returns id
  */
-router.delete("/:id", (req, res) => {
+router.delete("/:id", (req, res, next) => {
     res.send("delete infos")
 })
 
