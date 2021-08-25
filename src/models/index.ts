@@ -10,3 +10,12 @@ export interface GoodSchema {
     restNum: number,    // 剩余数量
     img: string,        // 图片地址
 }
+
+/**
+ * 奖池
+ */
+export interface LotterySchema {
+    lotteryId: string,     // 奖池 id
+    name: string,          // 奖池名
+    goods: GoodSchema[],   // 奖品
+}

@@ -1,4 +1,4 @@
-import { GoodSchema } from "~/models";
+import { GoodSchema, LotterySchema } from "~/models";
 import { v4 as uuidv4 } from "uuid"
 
 /**
@@ -6,10 +6,13 @@ import { v4 as uuidv4 } from "uuid"
  */
 class LotteryStore {
     // 存放奖池的容器
-    private _lotteryMap: Map<string, GoodSchema[]>
+    private _lotteryMap: Map<string, LotterySchema>
+    // 存放抽奖结果
+    private _lotteryResultMap: Map<string, string[]>
 
     constructor() {
-        this._lotteryMap = new Map<string, GoodSchema[]>()
+        this._lotteryMap = new Map()
+        this._lotteryResultMap = new Map()
     }
 
     /**
@@ -26,9 +29,14 @@ class LotteryStore {
      * @param { GoodSchema[] } goods 奖池奖品
      * @returns { string } 奖池 id, 返回前端更新前端数据
      */
-    public add(goods: GoodSchema[]): string {
+    public add(name: string, goods: GoodSchema[]): string {
         const newLotteryId = uuidv4()
-        this._lotteryMap.set(newLotteryId, goods)
+        const newLottery: LotterySchema = {
+            lotteryId: newLotteryId,
+            name,
+            goods
+        }
+        this._lotteryMap.set(newLotteryId, newLottery)
 
         return newLotteryId
     }
@@ -38,7 +46,7 @@ class LotteryStore {
      * @param id 奖池 id
      * @returns { boolean }
      */
-    public find(id: string): GoodSchema[] {
+    public find(id: string): LotterySchema {
         if (!this.has(id)) throw Error("no such lottery")
 
         return this._lotteryMap.get(id)!
@@ -51,16 +59,15 @@ class LotteryStore {
      * @param good 
      */
     public put(id: string, good: GoodSchema) {
-        const lottery = this.find(id)
-        let prevGood = lottery.find((item) => item.goodId === good.goodId)
+        // const lottery = this.find(id)
+        // let prevGood = lottery.find((item) => item.goodId === good.goodId)
 
-        if (prevGood) {
-            prevGood = { ...good }
-        } else {
-            lottery.push(good)
-            lottery.sort((a, b) => a.placeIndex - b.placeIndex)
-        }
-
+        // if (prevGood) {
+        //     prevGood = { ...good }
+        // } else {
+        //     lottery.push(good)
+        //     lottery.sort((a, b) => a.placeIndex - b.placeIndex)
+        // }
     }
 
     /**
