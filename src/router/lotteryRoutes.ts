@@ -14,9 +14,7 @@ const upload = multer()
  * @sample http://localhost:8888/lottery/all
  * @returns
  */
-router.get("/all", (req, res, next) => {
-    res.send("all infos1")
-})
+router.get("/all", (req, res, next) => { })
 
 /**
  * 获取对应奖池信息
@@ -26,9 +24,7 @@ router.get("/all", (req, res, next) => {
  * @sample http://localhost:8888/lottery/:id
  * @returns
  */
-router.get("/:id", (req, res, next) => {
-    res.send("get infos")
-})
+router.get("/:id", (req, res, next) => { })
 
 /**
  * 新增奖池
@@ -38,9 +34,7 @@ router.get("/:id", (req, res, next) => {
  * @sample http://localhost:8888/lottery/
  * @returns id
  */
-router.post("/", jsonParser, (req, res, next) => {
-    res.send("post infos")
-})
+router.post("/", jsonParser, (req, res, next) => { })
 
 /**
  * 修改对应奖池信息
@@ -50,9 +44,7 @@ router.post("/", jsonParser, (req, res, next) => {
  * @sample http://localhost:8888/lottery/:id
  * @returns
  */
-router.put("/:id", jsonParser, (req, res, next) => {
-    res.send("put infos")
-})
+router.put("/:id", jsonParser, (req, res, next) => { })
 
 /**
  * 删除对应奖池
@@ -62,8 +54,6 @@ router.put("/:id", jsonParser, (req, res, next) => {
  * @sample http://localhost:8888/lottery/:id
  * @returns id
  */
-router.delete("/:id", (req, res, next) => {
-    res.send("delete infos")
-})
+router.delete("/:id", (req, res, next) => { })
 
 export default router
